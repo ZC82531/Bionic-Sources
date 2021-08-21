@@ -153,5 +153,30 @@ span{
     width: 100%;
     z-index: -5;
 }
-
+@media(max-width: 500px){
+    #navbar_div a{
+        font-size: 10px
+    }
+    #selection_sub {
+        width: 90%;
+    }
+}
+#logo:hover {
+    animation-duration: 3s;
+    animation-name: zoomout;
+  
+  }
+  
+  @keyframes zoomout {
+    0% {
+      transform: scale(1.0);
+    }
+    50%{
+      transform: scale(0.9);
+    }
+    100%{
+      transform: scale(1.0);
+    }  
+  }
+  
 

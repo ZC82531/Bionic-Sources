@@ -132,6 +132,24 @@ ul li{
     }
 }
 
-a{
+#navbar_div a{
     text-decoration: underline;
 }
+#logo:hover {
+    animation-duration: 3s;
+    animation-name: zoomout;
+  
+  }
+  
+  @keyframes zoomout {
+    0% {
+      transform: scale(1.0);
+    }
+    50%{
+      transform: scale(0.9);
+    }
+    100%{
+      transform: scale(1.0);
+    }  
+  }
+  

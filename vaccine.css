@@ -8,7 +8,7 @@
     line-height: 50px;
 }
 #logo{
-    width: 16%;
+    width: 15%;
 }
 .items{
     color: white;
@@ -24,8 +24,8 @@ img {
 #current:hover{
     background-color: green;
 }
-a {
-    width: 20%;
+#navbar_div a {
+    width: 14%;
     text-align: center;
     text-decoration: none;
 }
@@ -40,46 +40,62 @@ a {
 #Home h1{
     color:white;
     font-size: 100px;
+    text-align: center;
 }
 #Home p{ /* This is basically saying that the p tag inside #Home gets the flex property, the parents does not*/
     color: white;
     font-size: 30px;
+    text-align: center;
     /* margin: 100px; */
 }
 #Home{
     display:flex;
     flex-direction:column; /*makes items in flex appear in column */
-    align-items: center; /centers item if in column, justify-content otherwise/
-    text-align:center;
+    align-items: center; /*centers item if in column, justify-content otherwise*/
 }
 #photo_1 {
-    width: 600px;
-    height: 400px;
-    margin-left: auto;
-    margin-right: auto;
+    width: 50%;
+    height: auto;
 }
 #photo_2 {
-    width: 600px;
-    height: 400px;
+    width: 50%;
+    height: auto;
     margin-top: 60px;
 }
 #photo_3 {
-    width:400px;
+    width:40%;
     height:auto;
     margin-top: 60px;
 }
 
 #photo_4 {
-    width:auto;
+    width:70%;
     height:auto;
     margin-top: 60px;
 }
-@media only screen and (max-width: 600px) {
-    #photo_1, #photo_2, #photo_3 {
-        width: 200px;
-        height: 200px;
+@media(max-width: 500px){
+    #navbar_div a{
+        font-size: 10px
     }
-    #Home p{
-        font-size: 25px;
+    #Home h1{
+        font-size: 70px;
     }
 }
+#logo:hover {
+    animation-duration: 3s;
+    animation-name: zoomout;
+  
+  }
+  
+  @keyframes zoomout {
+    0% {
+      transform: scale(1.0);
+    }
+    50%{
+      transform: scale(0.9);
+    }
+    100%{
+      transform: scale(1.0);
+    }  
+  }
+  

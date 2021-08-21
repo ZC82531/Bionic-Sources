@@ -1,4 +1,4 @@
-/* background stuff  */
+
 #granim-canvas{
     position: fixed;
     top: 0;
@@ -15,10 +15,27 @@
     font-size: 15px;
     padding: 5px;
     line-height: 50px;
-    margin-bottom: 40px;
 }
 #logo{
     width: 16%;
+}
+
+#logo:hover {
+  animation-duration: 3s;
+  animation-name: zoomout;
+
+}
+
+@keyframes zoomout {
+  0% {
+    transform: scale(1.0);
+  }
+  50%{
+    transform: scale(0.9);
+  }
+  100%{
+    transform: scale(1.0);
+  }  
 }
 
 .items{
@@ -29,14 +46,27 @@ img {
     width: 300px;
 }
 
+#current:hover{
+  background-color: green;
+}
+
 .items:hover {                  /* pseudoclass */
     background-color: gray;
     opacity: 0.5;
 }
-#current:hover{
-    background-color: green;
+@media(max-width: 500px){
+    #navbar_div a{
+        font-size: 13px;
+    }
 }
 
+a {
+    width: 20%;
+    text-align: center;
+    text-decoration: none;
+}
+
+  
 /* Set the size of the div element that contains the map */
 #map {
     height: 400px;
