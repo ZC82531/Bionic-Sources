@@ -15,3 +15,4 @@ let options = {
     }
 };
 let granimInstance = new Granim(options);
+

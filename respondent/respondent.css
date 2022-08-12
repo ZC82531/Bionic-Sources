@@ -129,7 +129,7 @@ padding: 20px 30px;
 overflow: hidden;
 overflow-y: scroll;
 }
-#user{
+#respondent{
 padding: 10px;
 color: white;
 width: fit-content;
@@ -140,7 +140,7 @@ background-color: rgb(95, 156, 67);
 color: black;
 word-break: break-word;
 }
-#respondent{
+#user{
 background-color: rgb(160, 65, 65);
 padding: 10px;
 color: white;
