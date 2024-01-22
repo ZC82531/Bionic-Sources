@@ -28,12 +28,12 @@ const database = firebase.database().ref();
   button.addEventListener("click", function (event) {
     event.preventDefault();
 
-    let msg = messageElement.value;
+    let response = messageElement.value;
     messageElement.value = "";
 
     // Create message data
     let element = {
-      USER: msg,
+      RESPONDENT: response,
     };
 
     // Push data to the database
@@ -54,7 +54,7 @@ const database = firebase.database().ref();
     if(messageData.RESPONDENT != undefined){
         let respondentMessage = document.createElement("p");
         respondentMessage.id = "respondent";
-        respondentMessage.innerHTML = "Representative: "+messageData.RESPONDENT;
+        respondentMessage.innerHTML = "You: "+messageData.RESPONDENT;
         allMessages.append(respondentMessage);
     }
   });
@@ -63,6 +63,6 @@ const database = firebase.database().ref();
     var typed = new Typed('#typed_2',{
         stringsElement: '#second',
         typeSpeed: 50,
-        backSpeed: 70,
+        backSpeed: 200,
         loop: true,
       });
