@@ -21,3 +21,5 @@ This part of the website takes advantage of an API to display relevant informati
 
 [Click here](https://zc82531.github.io/Bionic-Sources/) to view the site.
 
+To view the respondent site, you can [click here](https://zc82531.github.io/Bionic-Sources/respondent/respondent.html).
+
