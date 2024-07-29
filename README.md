@@ -1,25 +1,33 @@
 # BionicSources
 
-Created by: Zakaria Chowdhury
+## Overview
+BionicSources is a comprehensive platform designed to provide essential information and resources related to health and safety during the COVID-19 pandemic. The website features a chat function, latest information, and real-time health statistics powered by an API.
 
-This is a website inspired by COVID-19, which includes a variety of resources ranging from a chat feature, map section that marks all the nearby hospitals in the NYC area, and uses API data to give current health statistics.
+## Features
 
-Below is the chat program. There is a backend page in the respondent directory. All other files are for public use.
-This is the public end of the site
-<p>
-  <img width="100%" height="auto" src="images/User.png">
-</p>
-This is the backend site for respondents
-<p>
-  <img width="100%" height="auto" src="images/Respondent.png">
-</p>
+### Public Site
+- **Chat Feature:** Engage with users through our integrated chat system.
+- **Health Statistics:** Access current health statistics via API integration.
 
-This part of the website takes advantage of an API to display relevant information:
 <p>
-  <img width="100%" height="auto" src="images/API_Stats.png">
+  <img width="50%" height="auto" src="images/User.png">
 </p>
 
-[Click here](https://zc82531.github.io/Bionic-Sources/) to view the site.
+### Respondent Backend
+- **Backend Management:** Dedicated page for managing respondent interactions and data.
 
-To view the respondent site, you can [click here](https://zc82531.github.io/Bionic-Sources/respondent/respondent.html).
+<p>
+  <img width="50%" height="auto" src="images/Respondent.png">
+</p>
+
+## API Integration
+The site utilizes an API to fetch and display relevant health information. This ensures that users have access to the most current and accurate data.
+
+<p>
+  <img width="50%" height="auto" src="images/API_Stats.png">
+</p>
+
+## Links
+- [View the Public Site](https://zc82531.github.io/Bionic-Sources/)
+- [Access the Respondent Site](https://zc82531.github.io/Bionic-Sources/respondent/respondent.html)
 
