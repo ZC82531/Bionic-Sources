@@ -7,41 +7,26 @@
     <title>Website</title>
     <link rel="stylesheet" href="respondent.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/granim/2.0.0/granim.min.js" integrity="sha512-CmlPTWm5+a1Gt2YSNk2rGZVvbH3Zge6imS7M4/vrhC8d+A1RcehmLxWMqUdv8aEu7pwfTo74EtnrR+8Cf8KdCA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-auth.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.10/typed.min.js" integrity="sha512-hIlMpy2enepx9maXZF1gn0hsvPLerXoLHdb095CmRY5HG3bZfN7XPBZ14g+TUDH1aGgfLyPHmY9/zuU53smuMw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
 </head>
 <body>
-    <canvas id="granim-canvas"></canvas>
+    <div id="app">
+        <granim-canvas></granim-canvas>
         <div id="second">
             <p>Please chat below with the users</p>
         </div>
         <div id="third">
             <span id="typed_2"></span>
         </div>
-        <div id="chat">
-            <div class="container"> 
-                <div class="header"> 
-                 <h1>Live Chat</h1> 
-                </div> 
-                <div class="body"> 
-                    <div class="start">
-                        <p id="start">
-                            Respond below to the users of the site
-                        </p>
-                    </div>
-                    
-                </div> 
-                <div class="footer"> 
-                 <form>
-                  <input placeholder = "Type Here" id="text" type="text" name=""> <button id="send">Send</button> 
-                 </form> 
-                </div> 
-               </div>
-        </div>
-        
-        <!-- The core Firebase JS SDK is always required and must be listed first -->
-        <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-app.js"></script>
+        <chat-component></chat-component>
+    </div>
 
-        <script>
-        // Your web app's Firebase configuration
+    <script>
+        // Initialize Firebase
         var firebaseConfig = {
             apiKey: "AIzaSyCzVPu6PkoZaEaLTJUs5x_lyn13-5QVTRc",
             authDomain: "covid-firebase-7d20b.firebaseapp.com",
@@ -50,16 +35,99 @@
             messagingSenderId: "421174865846",
             appId: "1:421174865846:web:7850b54260c09d15d4db17",
         };
-        // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
-        </script>
-        <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-database.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-auth.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.10/typed.min.js" integrity="sha512-hIlMpy2enepx9maXZF1gn0hsvPLerXoLHdb095CmRY5HG3bZfN7XPBZ14g+TUDH1aGgfLyPHmY9/zuU53smuMw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-        <script src="respondent.js" defer></script>
-    </body>
+        Vue.component('granim-canvas', {
+            template: '<canvas id="granim-canvas"></canvas>',
+            mounted() {
+                new Granim({
+                    element: '#granim-canvas',
+                    direction: 'left-right',
+                    states: {
+                        'default-state': {
+                            gradients: [
+                                ['#ffe259', '#ffa751'],
+                                ['#ee9ca7', '#ffdde1'],
+                            ],
+                            transitionSpeed: 3000,
+                            loop: true,
+                        },
+                    },
+                });
+            },
+        });
+
+        Vue.component('chat-component', {
+            template: `
+                <div id="chat">
+                    <div class="container">
+                        <div class="header">
+                            <h1>Live Chat</h1>
+                        </div>
+                        <div class="body">
+                            <div class="start">
+                                <p id="start">Respond below to the users of the site</p>
+                            </div>
+                        </div>
+                        <div class="footer">
+                            <form @submit.prevent="sendMessage">
+                                <input v-model="message" placeholder="Type Here" id="text" type="text" />
+                                <button id="send">Send</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            `,
+            data() {
+                return {
+                    message: '',
+                };
+            },
+            methods: {
+                sendMessage() {
+                    if (this.message.trim() !== '') {
+                        const database = firebase.database().ref();
+                        const msg = this.message;
+                        this.message = '';
+
+                        database.push({ RESPONDENT: msg });
+                    }
+                },
+            },
+            mounted() {
+                const database = firebase.database().ref();
+                const allMessages = document.querySelector(".body");
+
+                database.on("child_added", (snapshot) => {
+                    const messageData = snapshot.val();
+
+                    if (messageData.USER) {
+                        const userMessage = document.createElement("p");
+                        userMessage.id = "user";
+                        userMessage.innerHTML = "User: " + messageData.USER;
+                        allMessages.append(userMessage);
+                    }
+
+                    if (messageData.RESPONDENT) {
+                        const respondentMessage = document.createElement("p");
+                        respondentMessage.id = "respondent";
+                        respondentMessage.innerHTML = "Representative: " + messageData.RESPONDENT;
+                        allMessages.append(respondentMessage);
+                    }
+                });
+
+                new Typed('#typed_2', {
+                    stringsElement: '#second',
+                    typeSpeed: 50,
+                    backSpeed: 70,
+                    loop: true,
+                });
+            },
+        });
+
+        new Vue({
+            el: '#app',
+        });
+    </script>
+</body>
 </html>
-
-
-
